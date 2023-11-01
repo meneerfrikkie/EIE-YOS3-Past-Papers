@@ -1,5 +1,9 @@
+/* Poor Sanity Check */
+
 #include <iostream>
 #include <string>
+#include <vector>
+#include <memory>
 
 using namespace std;
 
@@ -15,6 +19,7 @@ public:
     ~Person()
     { cout << "Destructing a person" << endl; }
 
+    string name() {return name_;}
 private:
     string name_;
 };
@@ -26,7 +31,28 @@ Person newPerson()
 
 int main()
 {
-    Person muaawiyah = newPerson();
+    // auto persons =  vector<Person>{}; 
+    // persons.push_back(Person("Muaawiyah"));
+    // cout << persons.size() << endl;
+    // cout << persons.capacity() << endl;
+
+    // persons.push_back(Person("Frikkie"));
+    // for (auto &person_ : persons)
+    // {
+    //     cout << person_.name() << endl;
+    // }
+
+    auto persons =  vector<shared_ptr<Person>>{}; 
+    persons.push_back(make_shared<Person>("Muaawiyah"));
+    cout << persons.size() << endl;
+    cout << persons.capacity() << endl;
+
+    persons.push_back(make_shared<Person>("Frikkie"));
+    for (auto &person_ : persons)
+    {
+        cout << person_->name() << endl;
+    }
+    
 
     return 0;
 }
